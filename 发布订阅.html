@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+<title>发布订阅</title>
+<meta name="viewport" content="width=device-width" />
+</head>
+<body>
+	<div id="app">
+		<button id="count">点击</button>
+		
+		<div id="show"></div>
+    </div>
+<script>
+var Event=(function(){
+	var clientList={};
+	var listen=function(key,fn){
+		if(!clientList[key]){
+			clientList[key]=[]
+		};
+		clientList[key].push(fn);
+	}
+	var trigger=function(){
+		console.log('arg:'+arguments.length);
+		var key=Array.prototype.shift.call(arguments)
+		console.log('arg:'+arguments.length);
+		var fns=clientList[key];
+		if(!fns||fns.length===0){
+			return false;
+		}
+		for(var i=0;i<fns.length;i++){
+			fns[i].apply(this,arguments);
+		}
+	}
+
+	var remove=function(key,fn){
+		var fns=clientList[key];
+		if(!fns){return false};
+		console.log(fns.length);
+		fns.filter(function(item){
+			return item!==fn;
+		});
+		console.log(fns.length);
+	}
+
+	return {
+		listen:listen,
+		trigger:trigger,
+		remove:remove
+	}
+})()
+function xiaomin(){
+	console.log('我是小明');
+}
+function xiaohong(a,b,c){
+	console.log('我是小红');
+	console.log('a:'+a+'b:'+b+'c'+c);
+}
+Event.listen('test',xiaomin);
+
+Event.listen('test',xiaohong);
+
+Event.trigger('test','AA','BB');
+
+	var button=document.getElementById('count');
+	var div=document.getElementById('show');
+
+	for (var i = 0; i < 10; i++) {
+		(function(index) {
+			console.log(index);
+			button.onclick = function() {
+				div.innerHTML = index;
+			}
+		})(i)
+	}
+	
+
+</script>
+</body>
+</html>
