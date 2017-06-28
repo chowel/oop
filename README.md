@@ -1,33 +1,19 @@
-# first-project
+# jungler
 
-> first-project
+> A Vue.js project
 
-## getting start
+## Build Setup
 
-```bash
+``` bash
+# install dependencies
 npm install
-```
 
-## file structure
-
-这些什么的 我都不会
-
-## npm scripts
-
-```bash
-# build both two js bundles for Weex and Web
-npm run build
-
-# build the two js bundles and watch file changes
+# serve with hot reload at localhost:8080
 npm run dev
 
-# start a Web server at 8080 port
-npm run serve
-
-# start weex-devtool for debugging with native
-npm run debug
+# build for production with minification
+npm run build
 ```
 
-## notes
-
-通知 准备搞一发，，，
+自定义插件
+异步加载
